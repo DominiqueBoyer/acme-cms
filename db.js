@@ -48,12 +48,21 @@ Page.prototype.findChildren = async function(){
   return await Page.findAll({where: {parentId: this.id}})
 };
 
+Page.prototype.hierarchy = async function(){
+  return await Page.findAll({where: { id: this.parentId}});
+}
+
 syncAndSeed()
   .then(async()=>{
     const home = await Page.findHomePage();
     console.log('hello', home.title);
     const homeChildren = await home.findChildren();
-    console.log(homeChildren.map( page => page.title)); //[About, Contact]
+    console.log('home children', homeChildren.map( page => page.title)); //[About, Contact];
+    const fax = await Page.findOne({ where: { title: 'Fax'}});
+    console.log('fax', fax.title);
+    let hier = await fax.hierarchy();
+    console.log('hierarchy', hier.map( page => page.title)); //['Fax', 'Contact', 'Home']
+
   })
 
 module.exports = {
