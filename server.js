@@ -33,5 +33,5 @@ app.get('/api/pages', async (req, res, next )=>{
 
 db.syncAndSeed()
   .then (()=>{
-    app.listen(3000, ()=> console.log('listening'));
+    app.listen(3000, ()=> console.log('LISTENING'));
   })
