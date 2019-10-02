@@ -13,17 +13,23 @@ app.get('/api/pages', async (req, res, next )=>{
 
 //the req.params.id is not working here
 
-app.get('/api/pages/:id/children', async (req, res, next )=>{
-  Page.findAll({ where: {parentId: req.params.id}})
-    .then( page => res.send(page))
-    .catch(next);
-});
 
-app.get('/api/pages/:id/siblings', async (req, res, next )=>{
-  Page.findAll({ where: { parentId: req.params.parentId}}).filter( page => page.id !== req.params.id)
-    .then( page => res.send(page))
-    .catch(next);
-})
+// app.get('/api/pages/:id', async (req, res, next )=>{
+//   Page.findPl({ where: {id: req.params.id}})
+//     .then( page => res.send(page))
+//     .catch(next);
+// });
+// app.get('/api/pages/:id/children', async (req, res, next )=>{
+//   Page.findAll({ where: {parentId: req.params.id}})
+//     .then( page => res.send(page))
+//     .catch(next);
+// });
+
+// app.get('/api/pages/:id/siblings', async (req, res, next )=>{
+//   Page.findAll({ where: { parentId: req.params.parentId}}).filter( page => page.id !== req.params.id)
+//     .then( page => res.send(page))
+//     .catch(next);
+// });
 
 db.syncAndSeed()
   .then (()=>{
